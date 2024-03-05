@@ -1,28 +1,45 @@
-print("Progama que veriifca se o cpf e valido \n")
-# variavel que guarda o cpf pelo usuario
-cpf_usuario = input("digite o seu cpf")
-# esssa variavel foi criada para calcular o peso de 10 ate 2
-peso10 = 10
-# a variavel resultado guarda soma das  multiplicaçoes entre os digitos do cpf e os pesos 
-resultado = 0 
-
-# para obter os 9 digitos do cpf foi nescessario usar uma estrutuara for de 0 a 9
-for i in range(0,9):
-    # exibindo um digito do cpf por vez em tela
-    print(cpf_usuario[i])
-    print(int(cpf_usuario[i])*peso10)
-    # para calcular um digito por vez com foi nescessario conveter cada digito em numero inteiro depois somamos os resultados obtidos armazenando na variavel 
-    resultado+=int(cpf_usuario[i])*peso10
-    peso10-=1
-    # todas as vezes q o laço for rodas sera substituido o valor 1 da varialvel peso10
-    print(resultado)
-    # exibindo o resultado encontrado 
-resto= resultado % 11  
-# a variavel resto guarda o resto da divisao 
-# se o resto da divisao for menor que 2 entao o primeiro digito sera 0(zero); caso contrario o devemos subtrair 11 pelo valor encontrado em resto 
-if(resto < 2):
+print("\nPrograma para verificar se o CPF digitado é válido\n")
+ 
+cpf_usu = input("Digite o seu CPF: ")   # Variável que guarda o CPF do usuário
+cpf_calc = ""                           # Variável que guarda o CPF que está calculando
+peso10 = 10 
+peso11= 11                              # Variável que serve para calcular o peso de 10 até 2
+rs = 0                                  # Variável que guarda a soma das multiplicações entre os dígitos de CPF e os pesos
+ 
+for i in range(0,9):                    # Para obter os 9 primeiros dígitos do CPF foi usado "for" com uma contagem de 0 até 9
+    print(cpf_usu[i])                   # Exibe um dígito do CPF por vez
+                                        # Adiciona a variável "cpf_calc" os nove primeiros dígitos do CPF e adiciona o primeiro dígito verificador adiante
+    print(int(cpf_usu[i])*peso10)
+    rs+=(int(cpf_usu[i])*peso10)        # Para calcular um dígito por vez com o peso, se            converteu                              cada        dígito em "int", depois, os resultados
+    cpf_calc += cpf_usu[i]                                    #foram somados e armazenados na variável "rs"
+    peso10-=1                           # Sempre que o loop "for" rodar, será subtraído o valor 1 da variável "peso10"
+ 
+print(rs)                               # Exibição do resultado encontrado
+resto = rs % 11                         # Variável que guarda o resto da divisão
+ 
+if(resto < 2):                          # Se o resto da divisão for menor que 2, o primeiro dígito será 0. Se não for, deverá subtrair 11 pelo valor
+                                        #encontrado em "rs"
+    print("Primeiro dígito é 0")
+    cpf_calc+="0"
+else:
+    print("Primeiro dígito é "+str(11-resto))
+    cpf_calc+=str(11-resto)
     
-    print("primeiro digito é 0\n")
-
-else: 
-    print("primeiro digito é "+str(11-resto))  
+    rs = 0
+    for i in range (0,10):
+        rs+=int (cpf_calc[i]*peso11)
+    
+    resto = rs % 11
+    if (resto < 2):
+        cpf_calc+="0"
+    else:
+        cpf_calc+=str(11-resto)        
+   
+   
+   
+    print(cpf_calc)     
+ # validar se o cpf do usuario e igual ao cpf do calculo 
+    if(cpf_usu==cpf_calc):
+     print ("cpf valido")
+    else:
+     print("cpf invalido")    
